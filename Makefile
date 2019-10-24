@@ -1,3 +1,4 @@
+CC := $(CROSS_COMPILE)gcc
 CFLAGS += -Wall -Werror
 LDFLAGS := -lrt -ldl
 
