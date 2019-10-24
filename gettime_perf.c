@@ -13,6 +13,12 @@
 #include <stdio.h>
 #include <errno.h>
 
+#if defined(__aarch64__)
+#define VDSO_CLOCK_GETTIME	"__kernel_clock_gettime"
+#else
+#define VDSO_CLOCK_GETTIME	"__vdso_clock_gettime"
+#endif
+
 #define pr_err(fmt, ...)						\
 	({								\
 		fprintf(stderr, fmt "\n", ##__VA_ARGS__);		\
@@ -37,7 +43,7 @@ static void fill_function_pointers(void)
 		return;
 	}
 
-	vdso_clock_gettime = (vgettime_t)dlsym(vdso, "__vdso_clock_gettime");
+	vdso_clock_gettime = (vgettime_t)dlsym(vdso, VDSO_CLOCK_GETTIME);
 	if (!vdso_clock_gettime)
 		pr_err("Warning: failed to find clock_gettime in vDSO\n");
 
