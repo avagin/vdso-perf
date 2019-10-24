@@ -1,0 +1,19 @@
+A simple perf test for clock_gettime()
+======================================
+
+Build gettime_perf
+==================
+
+  $ export CROSS_COMPILE=<cross compile triple>
+  $ make
+
+
+Run gettime_perf
+================
+
+  $ ./gettime_perf
+  clock:        monotonic cycles:  157619725
+  clock: monotonic-coarse cycles:  577629197
+  clock:    monotonic-raw cycles:  156798341
+  clock:         boottime cycles:  157180753
+
